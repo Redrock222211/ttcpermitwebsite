@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tree Company Property Viewer</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background: linear-gradient(rgb(24, 156, 41) 33%, #bdb8b8 33%), url('path/to/ghosted-background-image.jpg') center/cover fixed no-repeat;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .result-section, .loading-section {
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+        form {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-family: "Arial", sans-serif;
+        }
+
+        label {
+            margin-right: 10px;
+            color: #000000;
+        }
+
+        input, button {
+            padding: 5px;
+            margin-right: 10px;
+            font-family: "Arial", sans-serif;
+            color: #000000;
+        }
+
+        /* Added style for the new button */
+        .search-button {
+            margin-top: 1px;
+        }
+
+        /* Added style for the top right image */
+        .top-right-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+        }
+
+        /* Loading spinner style */
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; /* Initially hide the loading spinner */
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-section">
+        <!-- Loading spinner -->
+        <div class="loading-spinner">
+            <!-- Replace the loading text with your loading spinner GIF -->
+            <img src="path/to/loading-spinner.gif" alt="Loading Spinner">
+        </div>
+    </div>
+
+    <h1>The Tree Company</h1>
+
+    <!-- Image in the top right corner -->
+    <img class="top-right-image" src="path/to/top-right-image.png" alt="Top Right Image">
+
+    <form method="post" action="/" onsubmit="showLoading()">
+        <label for="query">Enter Address:</label>
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="result-section">
+        <h2>Property data:</h2>
+        <pre>{{ result.split('\n\n')[0]|replace(",", "<br>")|safe }}</pre>
+    </div>
+    <div class="result-section">
+        <h2>Overlay and Permit Data:</h2>
+        <pre>{{ result.split('\n\n')[1]|replace(",", "<br>")|safe }}</pre>
+    </div>
+    
+    <!-- New button to go to the specified website -->
+    <form class="search-button" method="get" action="https://www.land.vic.gov.au/property-and-parcel-search" target="_blank">
+        <button type="submit">Go to Property Search Website</button>
+    </form>
+
+    <script>
+        function showLoading() {
+            // Show the loading spinner
+            document.querySelector('.loading-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
